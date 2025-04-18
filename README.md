@@ -119,3 +119,38 @@ This project is possible thanks to the inspirations and resources from [the KaTe
 - [ ] : Breakable equations
 - [ ] : MathML parsing and encoding
 
+## Testing
+
+This project uses Docker to ensure a consistent testing environment across different machines, which is especially important for golden file tests.
+
+**Prerequisites:**
+
+* [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running.
+
+**Running All Tests:**
+
+To run all tests, execute the following command from the root of the project directory in your terminal (e.g., PowerShell, bash):
+
+```bash
+# For PowerShell on Windows:
+docker run --rm -it -v "$(pwd):/build" --workdir /build ghcr.io/cirruslabs/flutter:3.27.0 flutter test
+
+# For bash/zsh (Linux/macOS/Git Bash):
+docker run --rm -it -v "${PWD}:/build" --workdir /build ghcr.io/cirruslabs/flutter:3.27.0 flutter test
+```
+
+This command uses a specific Flutter version (3.27.0) inside a Linux container to run the tests.
+
+**Updating Golden Files:**
+
+If you make changes that affect widget rendering, you may need to update the golden image files. Run the appropriate command for your terminal:
+
+```bash
+# For PowerShell on Windows:
+docker run --rm -it -v "$(pwd):/build" --workdir /build ghcr.io/cirruslabs/flutter:3.27.0 flutter test --update-goldens
+
+# For bash/zsh (Linux/macOS/Git Bash):
+docker run --rm -it -v "${PWD}:/build" --workdir /build ghcr.io/cirruslabs/flutter:3.27.0 flutter test --update-goldens
+```
+
+Commit the updated golden files along with your code changes. The test setup is configured to generate and check goldens within this specific Docker environment.
