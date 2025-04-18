@@ -41,11 +41,8 @@ void testTexToMatchGoldenFile(
       ),
     );
     await tester.pumpAndSettle();
-    if (Platform.isWindows) {
-      // Android-specific code
-      await expectLater(find.byKey(key),
-          matchesGoldenFile(location ?? 'golden/${description.hashCode}.png'));
-    }
+    await expectLater(find.byKey(key),
+        matchesGoldenFile(location ?? 'golden/${description.hashCode}.png'));
   });
 }
 
@@ -110,13 +107,10 @@ void testTexToRenderLike(
       ),
     );
     await tester.pumpAndSettle();
-    if (Platform.isWindows) {
-      // Android-specific code
-      await expectLater(
-          find.byKey(key),
-          matchesGoldenFile(
-              'golden/temp/${(description + expression1 + expression2).hashCode}.png'));
-    }
+    await expectLater(
+        find.byKey(key),
+        matchesGoldenFile(
+            'golden/temp/${(description + expression1 + expression2).hashCode}.png'));
 
     final key2 = GlobalKey();
     await tester.pumpWidget(
@@ -141,13 +135,10 @@ void testTexToRenderLike(
       ),
     );
     await tester.pumpAndSettle();
-    if (Platform.isWindows) {
-      // Android-specific code
-      await expectLater(
-          find.byKey(key2),
-          matchesGoldenFile(
-              'golden/temp/${(description + expression1 + expression2).hashCode}.png'));
-    }
+    await expectLater(
+        find.byKey(key2),
+        matchesGoldenFile(
+            'golden/temp/${(description + expression1 + expression2).hashCode}.png'));
   });
 }
 
